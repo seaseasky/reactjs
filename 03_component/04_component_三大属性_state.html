@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js" ></script>
+   
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Weather extends React.Component {
+            constructor(props){
+                super(props)
+                this.state = {isHot: false}
+                this.changeWeather = this.changeState.bind(this)
+            }
+            render() {
+                return <h2 onClick={this.changeWeather}>今天的天气{this.state.isHot? '炎热':'凉爽'}</h2>
+            }
+            changeState(){
+                const isHot = this.state.isHot
+                this.setState({isHot:!isHot})
+            }
+        }
+        ReactDOM.render(<Weather/>,document.getElementById('root'))
+    </script>
+</body>
+</html>
