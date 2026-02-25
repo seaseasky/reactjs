@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- 引入 React 和 Babel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js" ></script>
+    <!-- 引入PropTypes -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.min.js"></script>
+   
+</head>
+<body>
+    <div id="root"></div>
+    <div id="root1"></div>
+    <div id="root2"></div>
+    <div id="root3"></div>
+    <script type="text/babel">
+        class Weather extends React.Component {
+            //构造器
+            // 在构造器中调用父类的构造器，并传入props参数
+            // 构造器是可选的，如果不需要在构造器中进行任何操作，可以省略构造器
+            // 如果需要在构造器中使用this.props，必须调用super(props)，否则会导致错误
+            constructor(props) {
+                super(props)
+            }
+            // 使用静态属性设置属性类型检查和默认属性
+            static propTypes = {
+                day: PropTypes.string.isRequired,
+                temp: PropTypes.string.isRequired,
+                wind: PropTypes.string.isRequired
+            }
+            // 设置默认属性
+            static defaultProps = {
+                day: "未知日期",
+                temp: "未知温度",
+                wind: "未知风向"
+            }
+            render() {
+                const {day, temp, wind} = this.props 
+                return (
+                    <ul>
+                      <li>日期: {day}</li>
+                      <li>温度: {temp}</li>
+                      <li>风向: {wind}</li>    
+                    </ul>
+                )
+            }
+
+        }
+        // // 设置属性类型检查
+        // Weather.propTypes = {
+        //     day: PropTypes.string.isRequired,
+        //     temp: PropTypes.string.isRequired,
+        //     wind: PropTypes.string.isRequired
+        // }
+        // // 设置默认属性
+        // Weather.defaultProps = {
+        //     day: "未知日期",
+        //     temp: "未知温度",
+        //     wind: "未知风向"
+        // }
+        ReactDOM.render(<Weather day="2026-02-28"  temp="2-10" wind="东风2-3级"/>,document.getElementById('root'))
+        ReactDOM.render(<Weather day="2026-03-01"  temp="2-11" wind="西风5-7级"/>,document.getElementById('root1'))
+        let weatherInfo = {day:"2026-03-02", temp:"3-12", wind:"南风3-4级"}
+        ReactDOM.render(<Weather {...weatherInfo}/>,document.getElementById('root2'))
+        // 测试属性类型检查和默认属性
+        ReactDOM.render(<Weather day={20260303} temp={4}/>,document.getElementById('root3'))
+    </script>
+</body>
+</html>

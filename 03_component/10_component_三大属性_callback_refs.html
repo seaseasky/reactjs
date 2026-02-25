@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- 引入 React 和 Babel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js" ></script>
+    <!-- 引入PropTypes -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.min.js"></script>
+   
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Person extends React.Component { 
+            showInputValue = ()=>{
+                 const {input} = this
+                 alert(input.value)
+                 // alert(this.refs.input.value) --- IGNORE ---
+            }
+            render() {
+                
+                return (
+                    <div>
+                        <input type="text" ref={input => this.input = input } placeholder="请输入内容"/>
+                        <button onClick={this.showInputValue}>Show Input Value</button>
+
+                    </div> 
+                )
+             }
+        }    
+    
+        ReactDOM.render(<Person/>,document.getElementById('root'))
+
+    </script>
+</body>
+</html>

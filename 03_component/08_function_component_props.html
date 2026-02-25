@@ -1,9 +1,8 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +10,9 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js" ></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -18,30 +20,15 @@
         <![endif]-->
         
         <script src="" async defer></script>
-        <script type="text/javascript">
-            // 展开数组
-            let oddNumber = [1,3,5,7,9]
-            let evenNumber = [2,4,6,8,10]
-            console.log(...evenNumber)
-            console.log(...oddNumber)
-            let all = [...oddNumber,...evenNumber]
-            console.log(...all)
-            // 可变参数
-            function addNumber(...numbers) {
-                return numbers.reduce( (pre,cur)=>{
-                    return pre+cur 
-                })
+        <script type="text/babel">
+            // 定义一个函数组件，接收props参数
+            // Function Component 可以使用Props
+            function MyComponent(props) {
+                const {name, age} = props
+                return <h2>I'm {name} and I'm {age} years old.</h2>
             }
-            console.log(addNumber(...all))
-
-            // 复制对象
-            let person = {name:"Tom", age:18}
-            let newPerson = {...person}
-            person.age = 29
-            console.log(newPerson)
-
-            let person2 = {...person, age:28, gender:"male"}
-            console.log(person2)
+            ReactDOM.render(<MyComponent name="Tom" age={18}/>,document.getElementById('root'))
         </script>
+        <div id="root"></div>
     </body>
 </html>

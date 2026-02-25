@@ -12,6 +12,7 @@
 <body>
     <div id="root"></div>
     <div id="root1"></div>
+    <div id="root2"></div>
     <script type="text/babel">
         class Weather extends React.Component {
             render() {
@@ -28,6 +29,8 @@
         }
         ReactDOM.render(<Weather day="2026-02-28"  temp="2-10" wind="东风2-3级"/>,document.getElementById('root'))
         ReactDOM.render(<Weather day="2026-03-01"  temp="2-11" wind="西风5-7级"/>,document.getElementById('root1'))
+        let weatherInfo = {day:"2026-03-02", temp:"3-12", wind:"南风3-4级"}
+        ReactDOM.render(<Weather {...weatherInfo}/>,document.getElementById('root2'))
     </script>
 </body>
 </html>
