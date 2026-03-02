@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- 引入 React 和 Babel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <!-- 引入PropTypes -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        /*
+          高阶函数：如果一个函数满足以下条件之一，就可以称为高阶函数：
+            1. 接受一个或多个函数作为参数
+            2. 返回一个函数作为结果
+            常见的高阶函数有：map、filter、reduce、sort等数组方法，以及函数式编程库如lodash和ramda中的函数。
+            函数的柯里化：将一个接受多个参数的函数转换成一个接受单一参数的函数，并且返回一个新的函数来处理剩余的参数。
+        */
+        class Login extends React.Component {
+            state = {
+                username: '',
+                password: ''
+            }
+            handleClick = (event) => {
+                const { username, password } = this.state
+                alert(`Username: ${username}, Password: ${password}`);
+            }
+            changeData = (dataType) => {
+                return (event) => {
+                    this.setState({ [dataType]: event.target.value })
+                }
+            }
+            render() {
+                return (
+                    <div>
+                        <div>
+                            <h2>Login Component</h2>
+                        </div>
+                        <div>
+                            <label htmlFor="username">Username:</label>
+                            <input type="text" id="username" name="username" onChange={this.changeData('username')} />
+                            <label htmlFor="password">Password:</label>
+                            <input type="password" id="password" name="password" onChange={this.changeData('password')} />
+                            <button onClick={this.handleClick}>Login</button>
+                        </div>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Login />, document.getElementById('root'))
+    </script>
+</body>
+
+</html>

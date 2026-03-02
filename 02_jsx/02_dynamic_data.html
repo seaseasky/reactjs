@@ -1,57 +1,60 @@
- <html>
-    <head>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" ></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js" ></script>
-        <style>
-            .title {
-                color: red;
-                background-color: aqua;
-                width: 200px;
-            }
-        </style>
-        <script type="text/babel">
-            const nameList=["刘默涵","刘梦真"]
+<html>
 
-            const VDOM = (
-                <div>
-                   <ul>
-                     {
-                        nameList.map((item,index)=>{
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <style>
+        .title {
+            color: red;
+            background-color: aqua;
+            width: 200px;
+        }
+    </style>
+    <script type="text/babel">
+        const nameList = ["刘德华", "刘备", "刘强东", "刘秀"]
+
+        const VDOM = (
+            <div>
+                <ul>
+                    {
+                        nameList.map((item, index) => {
                             return <li key={index}>{item}</li>
                         })
-                     }
-                    </ul>
-                </div>
-            )
-            ReactDOM.render(VDOM,document.getElementById('root'))
-            /**
-             * jsx语法规则：
-             *          1 定义虚拟DOM时，不要写引号
-             *          2 标签中混入JS表达式时要用{}
-             *          3 样式的类名指定不要使用class，而使用className
-             *          4 内联样式，要使用style={{key:value}} 的样式去写
-             *          5 只有一个根标签
-             *          6 标签要闭合 
-             *          7 自定义标签
-             *              1）如果标签首字母是小写，则将其转为同名的html代码
-             *              2）如果标签首字母大写，则将其理解为React组件
-             * 
-             * 一定要区分js语句和js表达式
-             * 表达式有如下几种
-             *    (1) a
-             *    (2) a+b
-             *    (3) demo(1)
-             *    (4) arr.map() 
-             *   （5） function test() {}
-             * 语句
-             *    if
-             *    for
-             *    swatch
-             */
-        </script>
-    </head>
-    <body>
-        <div id = "root"></div>
-    </body>
- </html>
+                    }
+                </ul>
+            </div>
+        )
+        ReactDOM.render(VDOM, document.getElementById('root'))
+        /**
+         * jsx语法规则：
+         *          1 定义虚拟DOM时，不要写引号
+         *          2 标签中混入JS表达式时要用{}
+         *          3 样式的类名指定不要使用class，而使用className
+         *          4 内联样式，要使用style={{key:value}} 的样式去写
+         *          5 只有一个根标签
+         *          6 标签要闭合 
+         *          7 自定义标签
+         *              1）如果标签首字母是小写，则将其转为同名的html代码
+         *              2）如果标签首字母大写，则将其理解为React组件
+         * 
+         * 一定要区分js语句和js表达式
+         * 表达式有如下几种
+         *    (1) a
+         *    (2) a+b
+         *    (3) demo(1)
+         *    (4) arr.map() 
+         *   （5） function test() {}
+         * 语句
+         *    if
+         *    for
+         *    swatch
+         */
+    </script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+
+</html>

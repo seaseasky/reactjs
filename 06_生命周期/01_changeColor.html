@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <!-- 引入 React 和 Babel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <script src="" async defer></script>
+    
+    <div id="root"></div>
+    <script type="text/babel">
+        class ColorChanger extends React.Component {
+            state = {
+                color: 'red'
+            }
+            componentDidMount() {
+                console.log('Component mounted')
+                this.timer = setInterval(() => {
+                    this.changeColor()
+                }, 500)
+            }
+            componentWillUnmount() {
+                console.log('Component will unmount')
+                clearInterval(this.timer)
+            }
+            changeColor = () => {
+                this.setState({ color: this.state.color === 'red' ? 'blue' : 'red' })
+            }
+            goToDie = () => {
+                
+            }
+            render() {
+                return (
+                    <div>
+                        <h2 style={{ color: this.state.color }}>This text changes color</h2>
+                        
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<ColorChanger />, document.getElementById('root'))
+        function goToDie() {
+            ReactDOM.unmountComponentAtNode(document.getElementById('root'))
+        }
+    </script>
+    <button onclick="javascript:goToDie()">销毁组件</button>
+</body>
+
+</html>
