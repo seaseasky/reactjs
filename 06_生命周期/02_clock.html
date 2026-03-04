@@ -1,0 +1,61 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <!-- 引入 React 和 Babel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+    <body> 
+        <div id="root"></div>
+        <script type="text/babel">
+            class Counter extends React.Component {
+                state = {
+                    hours: 0,
+                    minutes: 0,
+                    seconds: 0
+                }
+                componentWillUpdate() {
+                    console.log('Component will update')
+                }
+                componentDidUpdate() {
+                    console.log('Component did update')
+                }
+                // 只有当秒数为偶数时才更新组件
+                shouldComponentUpdate(nextProps, nextState) {
+                    return nextState.seconds % 2 === 0
+                }
+                componentWillMount() {
+                    console.log('1 Component will mount')
+                }
+                componentDidMount() {
+                    console.log('2 Component did mount')
+                    this.timer = setInterval(() => {
+                        const { hours, minutes, seconds } = this.state
+                        this.setState({
+                            hours: seconds === 59 ? (minutes === 59 ? hours + 1 : hours) : hours,
+                            minutes: seconds === 59 ? (minutes === 59 ? 0 : minutes + 1) : minutes,
+                            seconds: seconds === 59 ? 0 : seconds + 1
+                        })
+                    }, 1000)
+                }
+                componentWillUnmount() {
+                    console.log('Component will unmount')
+                    clearInterval(this.timer)
+                }
+                
+                render() {
+                    return (
+                        <h2>计时器: {this.state.hours}:{this.state.minutes}:{this.state.seconds}</h2>
+                    )
+                }
+            }
+            ReactDOM.render(<Counter />, document.getElementById('root'))
+        </script>
+    </body>
+</html>

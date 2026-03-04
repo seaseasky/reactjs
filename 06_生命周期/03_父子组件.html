@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <!-- 引入 React 和 Babel -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    </head>
+    <body> 
+        <div id="root"></div>
+        <script type="text/babel">
+            class Counter extends React.Component {
+                render(){
+                    return <div style={{display:"flex", alignItems:"center"}}>
+                         <div style={{width:"20px", backgroundColor:"lightblue"}}>{this.props.value}</div>:{this.props.name}
+                        </div>
+                }
+            }
+            class Lock extends React.Component {
+                state = {
+                    running: false,
+                    hours: 0,
+                    minutes: 0,
+                    seconds: 0
+                }
+                componentDidMount() {
+                        this.startTimer()
+                }
+                startTimer = () => {
+                    const { running } = this.state
+                    if (running) {
+                        console.warn('Timer is already running')
+                        return
+                    }
+                    this.setState({ running: true })
+                    this.timer = setInterval(() => {
+                        const { hours, minutes, seconds } = this.state
+                        this.setState({
+                            hours: seconds === 59 ? (minutes === 59 ? hours + 1 : hours) : hours,
+                            minutes: seconds === 59 ? (minutes === 59 ? 0 : minutes + 1) : minutes,
+                            seconds: seconds === 59 ? 0 : seconds + 1
+                        })
+                    }, 1000)
+                }
+                componentWillUnmount() {
+                    clearInterval(this.timer)
+                }
+                reset = () => {
+                    this.setState({
+                        hours: 0,
+                        minutes: 0,
+                        seconds: 0
+                    })
+                }
+                stop = () => {
+                    clearInterval(this.timer)
+                    this.setState({ running: false })
+                }
+                render() {
+                    return <div>
+                            <div style={{display:"flex", alignItems:"center"}}>
+                            <h2>计时器:</h2>
+                            {/* 组件复用，传入不同的props */}
+                            <Counter name="时" value={this.state.hours}></Counter>
+                            <Counter name="分" value={this.state.minutes}></Counter>
+                            <Counter name="秒" value={this.state.seconds}></Counter>
+                            </div>
+                            <button style={{width:"70px",margin:"10px"}} onClick={this.reset}>重置</button>
+                            <button style={{width:"70px",margin:"10px"}} onClick={this.startTimer}>开始</button>
+                            <button style={{width:"70px",margin:"10px"}} onClick={this.stop}>停止</button>
+                        </div>
+                        
+                }
+            }
+             ReactDOM.render(<Lock />, document.getElementById('root'))
+            </script>
+    </body>
+</html>
